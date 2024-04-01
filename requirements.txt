@@ -1,0 +1,5 @@
+dbt-postgres
+faker
+psycopg2
+pandas
+sqlalchemy

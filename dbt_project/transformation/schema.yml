@@ -1,0 +1,211 @@
+version: 2
+models:
+  - name: SRC_HR_LOGS
+    description: ""
+    columns:
+      - name: employee_id
+        description: ""
+        data_type: integer
+      - name: name
+        description: ""
+        data_type: character varying
+      - name: position
+        description: ""
+        data_type: character varying
+      - name: department
+        description: ""
+        data_type: character varying
+      - name: email
+        description: ""
+        data_type: character varying
+      - name: hire_date
+        description: ""
+        data_type: timestamp without time zone
+  - name: VIZ_HR_FINANCE_EMPLOYEE
+    description: ""
+    columns:
+      - name: employee_id
+        description: ""
+        data_type: integer
+      - name: name
+        description: ""
+        data_type: character varying
+      - name: position
+        description: ""
+        data_type: character varying
+      - name: department
+        description: ""
+        data_type: character varying
+      - name: email
+        description: ""
+        data_type: character varying
+      - name: hire_date
+        description: ""
+        data_type: timestamp without time zone
+  - name: VIZ_HR_IT_EMPLOYEE
+    description: ""
+    columns:
+      - name: employee_id
+        description: ""
+        data_type: integer
+        tests:
+          - unique
+          - not_null
+      - name: name
+        description: ""
+        data_type: character varying
+      - name: position
+        description: ""
+        data_type: character varying
+      - name: department
+        description: ""
+        data_type: character varying
+      - name: email
+        description: ""
+        data_type: character varying
+      - name: hire_date
+        description: ""
+        data_type: timestamp without time zone
+  - name: F_ORDERS
+    description: ""
+    columns:
+      - name: order_id
+        description: ""
+        data_type: integer
+        tests:
+          - unique
+          - not_null
+      - name: account_id
+        description: ""
+        data_type: integer
+      - name: order_amount
+        description: ""
+        data_type: numeric
+      - name: order_date
+        description: ""
+        data_type: timestamp without time zone
+      - name: name
+        description: ""
+        data_type: character varying
+      - name: email
+        description: ""
+        data_type: character varying
+      - name: account_number
+        description: ""
+        data_type: character varying
+      - name: balance
+        description: ""
+        data_type: numeric
+  - name: SRC_ORDERS
+    description: ""
+    columns:
+      - name: order_id
+        description: ""
+        data_type: integer
+        tests:
+          - unique
+          - not_null
+      - name: account_id
+        description: ""
+        data_type: integer
+      - name: order_amount
+        description: ""
+        data_type: numeric
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "> 1"
+      - name: order_date
+        description: ""
+        data_type: timestamp without time zone
+  - name: VIZ_ORDERS
+    description: ""
+    columns:
+      - name: order_id
+        description: ""
+        data_type: integer
+      - name: account_id
+        description: ""
+        data_type: integer
+      - name: order_amount
+        description: ""
+        data_type: numeric
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "> 18"
+      - name: order_date
+        description: ""
+        data_type: timestamp without time zone
+      - name: name
+        description: ""
+        data_type: character varying
+      - name: email
+        description: ""
+        data_type: character varying
+      - name: account_number
+        description: ""
+        data_type: character varying
+      - name: balance
+        description: ""
+        data_type: numeric
+  - name: VIZ_ORDERS_AVG_NB_BY_CUSTOMER
+    description: The average number of orders by customers
+    columns:
+      - name: customer_name
+        description: ""
+        data_type: character varying
+      - name: count
+        description: ""
+        data_type: bigint
+  - name: VIZ_ORDERS_AVG_AMOUNT_BY_CUSTOMER
+    description: ""
+    columns:
+      - name: customer_name
+        description: ""
+        data_type: character varying
+      - name: sum
+        description: ""
+        data_type: numeric
+  - name: VIZ_IT_PURCHASE_ORDERS
+    description: ""
+    columns:
+      - name: po_id
+        description: ""
+        data_type: integer
+      - name: vendor_name
+        description: ""
+        data_type: character varying
+      - name: po_amount
+        description: ""
+        data_type: numeric
+      - name: po_date
+        description: ""
+        data_type: timestamp without time zone
+      - name: employee_id
+        description: ""
+        data_type: integer
+      - name: name
+        description: ""
+        data_type: character varying
+      - name: position
+        description: ""
+        data_type: character varying
+      - name: department
+        description: ""
+        data_type: character varying
+      - name: email
+        description: ""
+        data_type: character varying
+      - name: hire_date
+        description: ""
+        data_type: timestamp without time zone
+
+sources:
+  - name: yourdatabase
+    database: yourdatabase
+    schema: public
+    tables:
+      - name: employees
+      - name: orders
+      - name: purchaseorders
+      - name: customers
+      - name: accounts
